@@ -20,7 +20,7 @@ A modern, dynamic voting system built for the English Club president election. B
 
 ## 🛠️ Technology Stack
 
-- **Framework**: Laravel 11.x
+- **Framework**: Laravel 11.0
 - **Frontend**: Blade, Bootstrap 5.3, Custom CSS
 - **Database**: MySQL 8.0
 - **Server**: FrankenPHP (via Laravel Octane)
@@ -38,25 +38,23 @@ A modern, dynamic voting system built for the English Club president election. B
    ```bash
    cp .env.example .env
    ```
-   *Note: Default `.env.example` is pre-configured for the Docker setup.*
 
-3. **Start the containers**
+3. **Install Dependencies & Generate Key**
    ```bash
-   docker compose up -d --build
-   ```
-
-4. **Install Dependencies & Generate Key**
-   ```bash
-   docker compose exec app composer install
-   docker compose exec app php artisan key:generate
+   composer install
+   php artisan key:generate
    ```
 
 5. **Run Migrations & Seed Database**
    ```bash
-   docker compose exec app php artisan migrate --seed
+   php artisan migrate --seed
    ```
 
 6. **Access the application**
+   ```bash
+   php artisan serve --port=8003
+   ```
+   
    - Public Voting Page: `http://localhost:8003`
    - Admin Panel: `http://localhost:8003/admin`
 
@@ -76,7 +74,3 @@ After running migrations with the `--seed` flag, a default admin account is crea
 - Voting Interface
 - Results Page
 - Admin Dashboard
-
-## 📄 License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
