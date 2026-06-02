@@ -1,55 +1,54 @@
-<!doctype html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pemilihan Presiden English Club</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&display=swap');
+@section('title', 'English Club Voting — Your Voice Matters')
 
-        * {
-            font-family: 'Baloo 2', Arial, Helvetica, sans-serif;
-        }
+@section('content')
+    @if($status === 'closed')
+        {{-- Voting Closed — Full-screen results redirect --}}
+        <section class="hero" style="min-height: 100vh; display: flex; align-items: center;">
+            <div class="container">
+                <h1>📊 Voting Has Ended! 📊</h1>
+                <p class="mb-4">The votes have been counted. See who won!</p>
+                <a href="{{ route('result') }}" class="btn-hero">
+                    🏆 View Results
+                </a>
+            </div>
+        </section>
 
-        body{
-            background: linear-gradient(to right, #0097b2, #00abc9);
-        }
+    @elseif($status === 'started')
+        {{-- Voting Active — Hero with call to action --}}
+        <section class="hero" style="min-height: 100vh; display: flex; align-items: center;">
+            <div class="container">
+                <h1>✨ Your Voice. Your Choice. Our Future. ✨</h1>
+                <p class="mb-2">Be part of the change! Choose the next leader of the English Club — someone who will bring fresh ideas and unite us all with passion and vision.</p>
+                <div class="mt-3 mb-4">
+                    <span class="status-badge started">
+                        <i class="bi bi-broadcast"></i> Voting is Open
+                    </span>
+                </div>
+                <a href="{{ route('vote') }}" class="btn-hero" style="margin-top: 1rem;">
+                    🗳️ Start Voting!
+                </a>
+            </div>
+        </section>
 
-        .hero {
-            background: linear-gradient(to right, #0097b2, #00abc9);
-            color: #fafafa;
-            padding: 350px 0;
-            text-align: center;
-        }
+    @else
+        {{-- Voting Not Started --}}
+        <section class="hero" style="min-height: 100vh; display: flex; align-items: center;">
+            <div class="container">
+                <h1>🕐 Voting Has Not Started Yet 🕐</h1>
+                <p class="mb-3">The voting session for the English Club president election will begin soon. Stay tuned!</p>
+                <div class="mt-3">
+                    <span class="status-badge not-started">
+                        Waiting to Start
+                    </span>
+                </div>
+                <p class="mt-4" style="opacity: 0.7; font-size: 0.95rem;">Please check back later or wait for an announcement.</p>
+            </div>
+        </section>
+    @endif
 
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: bold;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-top: 10px;
-        }
-    </style>
-</head>
-
-<body>
-    <section class="hero">
-        <div class="container">
-            <h1>✨ Your Voice. Your Choice. Our Future. ✨</h1>
-            <p>Be part of the change! Choose the next leader of the English Club — someone who will bring fresh ideas
-                and unite us all with passion and vision.</p>
-            <a href="/vote" class="btn btn-light" style="font-size: 18px; margin-top: 2rem;">Start Voting!</a>
-        </div>
-    </section>
+    <div class="footer-text">
+        &copy; {{ date('Y') }} English Club Voting System
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
-    </script>
-</body>
-
-</html>
+@endsection

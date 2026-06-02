@@ -1,167 +1,121 @@
-<!doctype html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Result Of The Voting!</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&display=swap');
+@section('title', 'Voting Results — English Club')
 
-        * {
-            font-family: 'Baloo 2', Arial, Helvetica, sans-serif;
-        }
-
-        body {
-            visibility: hidden;
-        }
-
-        .hero {
-            background: linear-gradient(to right, #0097b2, #00abc9);
-            color: #fafafa;
-            padding: 80px 0;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: bold;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-top: 10px;
-        }
-
-        .row-table {
-            border-top: 0.5px solid #ccc;
-        }
-
-        .row-table td,
-        .row-table th {
-            padding-top: 15px;
-        }
-
-        .card {
-            margin: 0.7rem;
-        }
-
-        .card-body p {
-            font-size: 22px;
-            font-weight: 600;
-            text-align: center;
-        }
-    </style>
-</head>
-
-<body>
+@section('content')
     <section class="hero">
         <div class="container">
-            <h1>📝 Result Of The Voting! 📝</h1>
+            <h1>🏆 Voting Results 🏆</h1>
+            <p>The votes have been counted. Here are the results!</p>
+            <p class="mt-2" style="opacity: 0.8;">Total Votes Cast: <strong>{{ $totalVotes }}</strong></p>
         </div>
     </section>
-    <div class="container mt-5" style="align-items: center; justify-items: center; align-content: center;">
-        <div class="row row-cols-1 row-cols-md-4 g-4" style="justify-content: space-between;">
-            {{-- Fahri --}}
-            <div class="col">
-                <div class="card" style="width: 280px;">
-                    <img src="{{ asset('images/fahri.jpg') }}" class="card-img-top"
-                        style="object-fit: cover; height: 300px;">
-                    <table class="table p-2">
-                        <tr class="row-table">
-                            <th>Nama</th>
-                            <td>:</td>
-                            <td>Fahri</td>
-                        </tr>
-                        <tr class="row-table">
-                            <th>Kelas</th>
-                            <td>:</td>
-                            <td>XI TKJ B</td>
-                        </tr>
-                    </table>
-                    <div class="card-body">
-                        <p>Total Suara : {{ $fahri }}</p>
-                    </div>
-                </div>
-            </div>
 
-            {{-- Syafa --}}
-            <div class="col">
-                <div class="card" style="width: 280px;">
-                    <img src="{{ asset('images/syafa.jpg') }}" class="card-img-top"
-                        style="object-fit: cover; height: 300px;">
-                    <table class="table p-2">
-                        <tr class="row-table">
-                            <th>Nama</th>
-                            <td>:</td>
-                            <td>Syafa</td>
-                        </tr>
-                        <tr class="row-table">
-                            <th>Kelas</th>
-                            <td>:</td>
-                            <td>XI RPL B</td>
-                        </tr>
-                    </table>
-                    <div class="card-body">
-                        <p>Total Suara : {{ $syafa }}</p>
+    <div class="container py-5">
+        {{-- Winner Announcement --}}
+        @if($president)
+            <div class="row justify-content-center g-4 mb-5">
+                {{-- President --}}
+                <div class="col-xl-4 col-lg-5 col-md-6 fade-in-up">
+                    <div class="glass-card winner-card president" style="position: relative; padding-top: 15px;">
+                        <div class="crown-badge">👑 President</div>
+                        <div style="overflow: hidden; margin-top: 10px;">
+                            @if($president->picture)
+                                <img src="{{ asset('candidates/' . $president->picture) }}" alt="{{ $president->name }}">
+                            @else
+                                <div style="height: 280px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;">
+                                    <span style="font-size: 4rem; opacity: 0.3;">👤</span>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="card-info text-center">
+                            <h5 style="font-size: 1.5rem;">{{ $president->name }}</h5>
+                            <p>📚 {{ $president->class }}</p>
+                            <div class="mt-2">
+                                <span style="font-size: 2rem; font-weight: 800;">{{ $president->votes_count }}</span>
+                                <span style="opacity: 0.7; font-size: 0.9rem;"> votes</span>
+                            </div>
+                            @if($totalVotes > 0)
+                                <div class="vote-bar-container mt-2">
+                                    <div class="vote-bar" style="width: {{ round(($president->votes_count / $totalVotes) * 100) }}%"></div>
+                                </div>
+                                <span style="opacity: 0.6; font-size: 0.8rem;">{{ round(($president->votes_count / $totalVotes) * 100, 1) }}%</span>
+                            @endif
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            {{-- Shasa --}}
-            <div class="col">
-                <div class="card" style="width: 280px;">
-                    <img src="{{ asset('images/shasa.jpg') }}" class="card-img-top"
-                        style="object-fit: cover; height: 300px;">
-                    <table class="table p-2">
-                        <tr class="row-table">
-                            <th>Nama</th>
-                            <td>:</td>
-                            <td>Shasa</td>
-                        </tr>
-                        <tr class="row-table">
-                            <th>Kelas</th>
-                            <td>:</td>
-                            <td>XI RPL D</td>
-                        </tr>
-                    </table>
-                    <div class="card-body">
-                        <p>Total Suara : {{ $shasa }}</p>
+                {{-- Vice President --}}
+                @if($vicePresident)
+                    <div class="col-xl-4 col-lg-5 col-md-6 fade-in-up">
+                        <div class="glass-card winner-card vice-president" style="position: relative; padding-top: 15px;">
+                            <div class="crown-badge">🥈 Vice President</div>
+                            <div style="overflow: hidden; margin-top: 10px;">
+                                @if($vicePresident->picture)
+                                    <img src="{{ asset('candidates/' . $vicePresident->picture) }}" alt="{{ $vicePresident->name }}">
+                                @else
+                                    <div style="height: 280px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;">
+                                        <span style="font-size: 4rem; opacity: 0.3;">👤</span>
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="card-info text-center">
+                                <h5 style="font-size: 1.5rem;">{{ $vicePresident->name }}</h5>
+                                <p>📚 {{ $vicePresident->class }}</p>
+                                <div class="mt-2">
+                                    <span style="font-size: 2rem; font-weight: 800;">{{ $vicePresident->votes_count }}</span>
+                                    <span style="opacity: 0.7; font-size: 0.9rem;"> votes</span>
+                                </div>
+                                @if($totalVotes > 0)
+                                    <div class="vote-bar-container mt-2">
+                                        <div class="vote-bar" style="width: {{ round(($vicePresident->votes_count / $totalVotes) * 100) }}%; background: linear-gradient(90deg, #c0c0c0, #a0a0a0);"></div>
+                                    </div>
+                                    <span style="opacity: 0.6; font-size: 0.8rem;">{{ round(($vicePresident->votes_count / $totalVotes) * 100, 1) }}%</span>
+                                @endif
+                            </div>
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
+        @endif
 
-            {{-- Gibran --}}
-            <div class="col">
-                <div class="card" style="width: 280px;">
-                    <div style="background-image: url('{{ asset('images/bg.png') }}')">
-                        <img src="{{ asset('images/gibran.png') }}" class="card-img-top"
-                            style="object-fit: cover; height: 300px; transform: scale(0.75); transform-origin: center; position: relative; top: 38px;">
+        {{-- All Candidates Ranking --}}
+        <div class="text-center mb-4 fade-in-up">
+            <h3 style="font-weight: 700;">📋 Full Rankings</h3>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                @foreach($candidates as $index => $candidate)
+                    <div class="fade-in-up" style="margin-bottom: 12px;">
+                        <div class="glass-card" style="border-radius: 14px; padding: 16px 20px; display: flex; align-items: center; gap: 16px;">
+                            <div style="font-size: 1.4rem; font-weight: 800; opacity: 0.5; min-width: 30px; text-align: center;">
+                                #{{ $index + 1 }}
+                            </div>
+                            @if($candidate->picture)
+                                <img src="{{ asset('candidates/' . $candidate->picture) }}" alt="{{ $candidate->name }}"
+                                    style="width: 50px; height: 50px; border-radius: 12px; object-fit: cover;">
+                            @else
+                                <div style="width: 50px; height: 50px; border-radius: 12px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;">
+                                    👤
+                                </div>
+                            @endif
+                            <div style="flex: 1;">
+                                <div style="font-weight: 700; font-size: 1.05rem;">{{ $candidate->name }}</div>
+                                <div style="opacity: 0.7; font-size: 0.85rem;">{{ $candidate->class }}</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-weight: 800; font-size: 1.2rem;">{{ $candidate->votes_count }}</div>
+                                <div style="opacity: 0.6; font-size: 0.75rem;">votes</div>
+                            </div>
+                        </div>
                     </div>
-                    <table class="table p-2">
-                        <tr class="row-table">
-                            <th>Nama</th>
-                            <td>:</td>
-                            <td>Gibran</td>
-                        </tr>
-                        <tr class="row-table">
-                            <th>Kelas</th>
-                            <td>:</td>
-                            <td>XI RPL D</td>
-                        </tr>
-                    </table>
-                    <div class="card-body">
-                        <p>Total Suara : {{ $gibran }}</p>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
-    </script>
-</body>
 
-</html>
+    <div class="footer-text">
+        &copy; {{ date('Y') }} English Club Voting System
+    </div>
+@endsection

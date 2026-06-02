@@ -1,0 +1,31 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: votingec_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-votingec}
+      MYSQL_USER: ${DB_USERNAME:-votingec_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-votingec_secret}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-votingec_secret}
+    volumes:
+      - votingec_db_data:/var/lib/mysql
+    ports:
+      - "3303:3306"
+    command: --default-authentication-plugin=mysql_native_password
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: votingec_app
+    ports:
+      - "8003:8003"
+    restart: always
+    depends_on:
+      - db
+    env_file:
+      - .env
+
+volumes:
+  votingec_db_data:
