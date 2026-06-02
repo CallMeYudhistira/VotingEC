@@ -112,4 +112,26 @@ class CandidateController extends Controller
         return redirect()->route('admin.candidates.index')
             ->with('success', 'Kandidat berhasil dihapus!');
     }
+
+    /**
+     * Reset all candidates and their pictures.
+     */
+    public function reset()
+    {
+        $candidates = Candidate::all();
+
+        foreach ($candidates as $candidate) {
+            if ($candidate->picture && file_exists(public_path('candidates/' . $candidate->picture))) {
+                unlink(public_path('candidates/' . $candidate->picture));
+            }
+        }
+
+        \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        \App\Models\Vote::truncate();
+        Candidate::truncate();
+        \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        return redirect()->route('admin.candidates.index')
+            ->with('success', 'Semua kandidat dan foto berhasil direset!');
+    }
 }

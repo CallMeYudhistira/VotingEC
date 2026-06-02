@@ -39,6 +39,11 @@ RUN mkdir -p storage/framework/cache/data \
     database \
     && chmod -R 777 storage bootstrap/cache public/candidates database
 
+RUN php artisan config:clear
+RUN php artisan cache:clear
+RUN php artisan route:clear
+RUN php artisan view:clear
+
 # Expose port 8003 for the app (as requested by user)
 EXPOSE 8003
 

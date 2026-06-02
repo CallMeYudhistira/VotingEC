@@ -29,28 +29,11 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #0097b2, #00abc9);
+            background: transparent;
             color: #fafafa;
             padding: 80px 0;
             text-align: center;
             position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
-            animation: shimmer 8s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0%, 100% { transform: translateX(-30%) translateY(-30%); }
-            50% { transform: translateX(30%) translateY(30%); }
         }
 
         .hero h1 {
@@ -79,12 +62,13 @@
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 16px;
         }
 
         .glass-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
         .glass-card img {
@@ -95,7 +79,7 @@
         }
 
         .glass-card:hover img {
-            transform: scale(1.05);
+            transform: scale(1.02);
         }
 
         .glass-card .card-info {
@@ -135,8 +119,8 @@
         .btn-vote:hover {
             background: #ffffff;
             color: #007a93;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 15px rgba(255, 255, 255, 0.2);
         }
 
         .btn-hero {
@@ -158,8 +142,8 @@
         .btn-hero:hover {
             background: #ffffff;
             color: #007a93;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
 
         /* Status Badge */
@@ -198,7 +182,7 @@
 
         .winner-card .crown-badge {
             position: absolute;
-            top: -15px;
+            top: 10px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 10;

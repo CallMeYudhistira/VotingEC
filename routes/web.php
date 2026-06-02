@@ -28,7 +28,7 @@ Route::get('/result', [VoteController::class, 'result'])->name('result');
 Route::prefix('admin')->group(function () {
     // Auth (guest only)
     Route::middleware('guest')->group(function () {
-        Route::get('/login', [AuthController::class, 'showLogin'])->name('admin.login');
+        Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
         Route::post('/login', [AuthController::class, 'login'])->name('admin.login.submit');
     });
 
@@ -38,6 +38,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 
         // Candidate management
+        Route::post('/candidates/reset', [CandidateController::class, 'reset'])->name('admin.candidates.reset');
         Route::resource('candidates', CandidateController::class)->names([
             'index' => 'admin.candidates.index',
             'create' => 'admin.candidates.create',

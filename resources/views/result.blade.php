@@ -87,7 +87,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 @foreach($candidates as $index => $candidate)
-                    <div class="fade-in-up" style="margin-bottom: 12px;">
+                    <div class="fade-in-up" style="margin-bottom: 18px;">
                         <div class="glass-card" style="border-radius: 14px; padding: 16px 20px; display: flex; align-items: center; gap: 16px;">
                             <div style="font-size: 1.4rem; font-weight: 800; opacity: 0.5; min-width: 30px; text-align: center;">
                                 #{{ $index + 1 }}
@@ -113,9 +113,5 @@
                 @endforeach
             </div>
         </div>
-    </div>
-
-    <div class="footer-text">
-        &copy; {{ date('Y') }} English Club Voting System
     </div>
 @endsection

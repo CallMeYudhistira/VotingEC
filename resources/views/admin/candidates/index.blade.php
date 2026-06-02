@@ -9,9 +9,17 @@
             <h5 style="font-weight: 700; color: #2d3748; margin: 0;">
                 <i class="bi bi-people-fill me-2"></i>Daftar Kandidat
             </h5>
-            <a href="{{ route('admin.candidates.create') }}" class="btn-teal">
-                <i class="bi bi-plus-lg me-1"></i> Tambah Kandidat
-            </a>
+            <div class="d-flex gap-2">
+                <form action="{{ route('admin.candidates.reset') }}" method="POST" class="d-inline" onsubmit="return confirm('PERINGATAN: Semua kandidat beserta foto dan suara mereka akan dihapus permanen! Apakah Anda yakin?')">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-danger" style="border-radius: 10px; font-weight: 600; padding: 10px 24px;">
+                        <i class="bi bi-arrow-counterclockwise me-1"></i> Reset Kandidat
+                    </button>
+                </form>
+                <a href="{{ route('admin.candidates.create') }}" class="btn-teal">
+                    <i class="bi bi-plus-lg me-1"></i> Tambah Kandidat
+                </a>
+            </div>
         </div>
         <table class="table">
             <thead>

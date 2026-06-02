@@ -47,8 +47,4 @@
             </div>
         </section>
     @endif
-
-    <div class="footer-text">
-        &copy; {{ date('Y') }} English Club Voting System
-    </div>
 @endsection

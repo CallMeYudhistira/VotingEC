@@ -61,21 +61,21 @@
             <form action="{{ route('admin.voting.status') }}" method="POST" class="d-inline">
                 @csrf
                 <input type="hidden" name="status" value="not_started">
-                <button type="submit" class="status-btn btn {{ $status === 'not_started' ? 'btn-warning active-status' : 'btn-outline-warning' }}">
+                <button type="submit" class="status-btn btn {{ $status === 'not_started' ? 'btn-warning active-status' : 'bg-white text-warning' }}">
                     <i class="bi bi-clock me-1"></i> Belum Dimulai
                 </button>
             </form>
             <form action="{{ route('admin.voting.status') }}" method="POST" class="d-inline">
                 @csrf
                 <input type="hidden" name="status" value="started">
-                <button type="submit" class="status-btn btn {{ $status === 'started' ? 'btn-success active-status' : 'btn-outline-success' }}">
+                <button type="submit" class="status-btn btn {{ $status === 'started' ? 'btn-success active-status' : 'bg-white text-success' }}">
                     <i class="bi bi-play-circle me-1"></i> Mulai Voting
                 </button>
             </form>
             <form action="{{ route('admin.voting.status') }}" method="POST" class="d-inline">
                 @csrf
                 <input type="hidden" name="status" value="closed">
-                <button type="submit" class="status-btn btn {{ $status === 'closed' ? 'btn-danger active-status' : 'btn-outline-danger' }}" onclick="return confirm('Yakin ingin menutup voting? Halaman hasil akan ditampilkan.')">
+                <button type="submit" class="status-btn btn {{ $status === 'closed' ? 'btn-danger active-status' : 'bg-white text-danger' }}" onclick="return confirm('Yakin ingin menutup voting? Halaman hasil akan ditampilkan.')">
                     <i class="bi bi-stop-circle me-1"></i> Tutup Voting
                 </button>
             </form>
@@ -83,7 +83,7 @@
             <div class="ms-auto">
                 <form action="{{ route('admin.voting.reset') }}" method="POST" class="d-inline">
                     @csrf
-                    <button type="submit" class="btn btn-outline-secondary status-btn" onclick="return confirm('PERINGATAN: Semua suara akan dihapus! Apakah Anda yakin?')">
+                    <button type="submit" class="btn bg-white text-secondary status-btn" onclick="return confirm('PERINGATAN: Semua suara akan dihapus! Apakah Anda yakin?')">
                         <i class="bi bi-arrow-counterclockwise me-1"></i> Reset Suara
                     </button>
                 </form>

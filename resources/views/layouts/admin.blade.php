@@ -10,7 +10,8 @@
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         * {
@@ -98,7 +99,7 @@
         /* Top navbar */
         .top-navbar {
             background: #fff;
-            padding: 16px 30px;
+            padding: 2rem 1.4rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -143,10 +144,21 @@
             color: #fff;
         }
 
-        .stat-card .stat-icon.bg-teal { background: linear-gradient(135deg, #0097b2, #00abc9); }
-        .stat-card .stat-icon.bg-amber { background: linear-gradient(135deg, #f59e0b, #d97706); }
-        .stat-card .stat-icon.bg-rose { background: linear-gradient(135deg, #f43f5e, #e11d48); }
-        .stat-card .stat-icon.bg-emerald { background: linear-gradient(135deg, #10b981, #059669); }
+        .stat-card .stat-icon.bg-teal {
+            background: linear-gradient(135deg, #0097b2, #00abc9);
+        }
+
+        .stat-card .stat-icon.bg-amber {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+
+        .stat-card .stat-icon.bg-rose {
+            background: linear-gradient(135deg, #f43f5e, #e11d48);
+        }
+
+        .stat-card .stat-icon.bg-emerald {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
 
         .stat-card .stat-value {
             font-size: 2rem;
@@ -263,12 +275,18 @@
             padding: 10px 20px;
             font-weight: 600;
             font-size: 0.9rem;
-            border: 2px solid;
+            border: none !important;
+            outline: none !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
             transition: all 0.2s ease;
+            margin-right: 12px;
         }
 
-        .status-btn:hover {
+        .status-btn:hover, .status-btn:focus, .status-btn:active {
             transform: translateY(-1px);
+            border: none !important;
+            outline: none !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .status-btn.active-status {
@@ -292,13 +310,15 @@
         </div>
         <ul class="sidebar-nav">
             <li>
-                <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                <a href="{{ route('admin.dashboard') }}"
+                    class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                     <i class="bi bi-speedometer2"></i>
                     Dashboard
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.candidates.index') }}" class="{{ request()->routeIs('admin.candidates.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.candidates.index') }}"
+                    class="{{ request()->routeIs('admin.candidates.*') ? 'active' : '' }}">
                     <i class="bi bi-people"></i>
                     Kelola Kandidat
                 </a>
@@ -324,7 +344,7 @@
                 </span>
                 <form action="{{ route('admin.logout') }}" method="POST" class="d-inline">
                     @csrf
-                    <button type="submit" class="btn btn-outline-danger btn-sm" style="border-radius: 8px;">
+                    <button type="submit" class="btn btn-danger mx-2" style="border-radius: 8px;">
                         <i class="bi bi-box-arrow-right"></i> Logout
                     </button>
                 </form>
@@ -333,14 +353,14 @@
 
         <div class="content-area">
             {{-- Flash Messages --}}
-            @if(session('success'))
+            @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <i class="bi bi-check-circle me-2"></i>{{ session('success') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
             @endif
 
-            @if(session('error'))
+            @if (session('error'))
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <i class="bi bi-exclamation-circle me-2"></i>{{ session('error') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
