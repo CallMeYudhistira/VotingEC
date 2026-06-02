@@ -30,7 +30,7 @@ A modern, dynamic voting system built for the English Club president election. B
 
 1. **Clone the repository**
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/CallMeYudhistira/VotingEC.git
    cd VotingEC
    ```
 
@@ -57,8 +57,8 @@ A modern, dynamic voting system built for the English Club president election. B
    ```
 
 6. **Access the application**
-   - Public Voting Page: `http://localhost:8002`
-   - Admin Panel: `http://localhost:8002/admin`
+   - Public Voting Page: `http://localhost:8003`
+   - Admin Panel: `http://localhost:8003/admin`
 
 ## 🔐 Default Admin Credentials
 
