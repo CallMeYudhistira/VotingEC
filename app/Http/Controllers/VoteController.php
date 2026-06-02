@@ -88,6 +88,8 @@ class VoteController extends Controller
         $president = $candidates->first();
         $vicePresident = $candidates->count() > 1 ? $candidates->get(1) : null;
 
-        return view('result', compact('candidates', 'totalVotes', 'president', 'vicePresident'));
+        $keyword = env('KEYWORD_RESULT');
+
+        return view('result', compact('candidates', 'totalVotes', 'president', 'vicePresident', 'keyword'));
     }
 }

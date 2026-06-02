@@ -11,19 +11,20 @@
         </div>
     </section>
 
-    <div class="container py-5">
+    <div class="container py-5" id="panel-result" style="display: none;">
         {{-- Winner Announcement --}}
-        @if($president)
+        @if ($president)
             <div class="row justify-content-center g-4 mb-5">
                 {{-- President --}}
                 <div class="col-xl-4 col-lg-5 col-md-6 fade-in-up">
                     <div class="glass-card winner-card president" style="position: relative; padding-top: 15px;">
                         <div class="crown-badge">👑 President</div>
                         <div style="overflow: hidden; margin-top: 10px;">
-                            @if($president->picture)
+                            @if ($president->picture)
                                 <img src="{{ asset('candidates/' . $president->picture) }}" alt="{{ $president->name }}">
                             @else
-                                <div style="height: 280px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;">
+                                <div
+                                    style="height: 280px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;">
                                     <span style="font-size: 4rem; opacity: 0.3;">👤</span>
                                 </div>
                             @endif
@@ -35,26 +36,30 @@
                                 <span style="font-size: 2rem; font-weight: 800;">{{ $president->votes_count }}</span>
                                 <span style="opacity: 0.7; font-size: 0.9rem;"> votes</span>
                             </div>
-                            @if($totalVotes > 0)
+                            @if ($totalVotes > 0)
                                 <div class="vote-bar-container mt-2">
-                                    <div class="vote-bar" style="width: {{ round(($president->votes_count / $totalVotes) * 100) }}%"></div>
+                                    <div class="vote-bar"
+                                        style="width: {{ round(($president->votes_count / $totalVotes) * 100) }}%"></div>
                                 </div>
-                                <span style="opacity: 0.6; font-size: 0.8rem;">{{ round(($president->votes_count / $totalVotes) * 100, 1) }}%</span>
+                                <span
+                                    style="opacity: 0.6; font-size: 0.8rem;">{{ round(($president->votes_count / $totalVotes) * 100, 1) }}%</span>
                             @endif
                         </div>
                     </div>
                 </div>
 
                 {{-- Vice President --}}
-                @if($vicePresident)
+                @if ($vicePresident)
                     <div class="col-xl-4 col-lg-5 col-md-6 fade-in-up">
                         <div class="glass-card winner-card vice-president" style="position: relative; padding-top: 15px;">
                             <div class="crown-badge">🥈 Vice President</div>
                             <div style="overflow: hidden; margin-top: 10px;">
-                                @if($vicePresident->picture)
-                                    <img src="{{ asset('candidates/' . $vicePresident->picture) }}" alt="{{ $vicePresident->name }}">
+                                @if ($vicePresident->picture)
+                                    <img src="{{ asset('candidates/' . $vicePresident->picture) }}"
+                                        alt="{{ $vicePresident->name }}">
                                 @else
-                                    <div style="height: 280px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;">
+                                    <div
+                                        style="height: 280px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;">
                                         <span style="font-size: 4rem; opacity: 0.3;">👤</span>
                                     </div>
                                 @endif
@@ -63,14 +68,18 @@
                                 <h5 style="font-size: 1.5rem;">{{ $vicePresident->name }}</h5>
                                 <p>📚 {{ $vicePresident->class }}</p>
                                 <div class="mt-2">
-                                    <span style="font-size: 2rem; font-weight: 800;">{{ $vicePresident->votes_count }}</span>
+                                    <span
+                                        style="font-size: 2rem; font-weight: 800;">{{ $vicePresident->votes_count }}</span>
                                     <span style="opacity: 0.7; font-size: 0.9rem;"> votes</span>
                                 </div>
-                                @if($totalVotes > 0)
+                                @if ($totalVotes > 0)
                                     <div class="vote-bar-container mt-2">
-                                        <div class="vote-bar" style="width: {{ round(($vicePresident->votes_count / $totalVotes) * 100) }}%; background: linear-gradient(90deg, #c0c0c0, #a0a0a0);"></div>
+                                        <div class="vote-bar"
+                                            style="width: {{ round(($vicePresident->votes_count / $totalVotes) * 100) }}%; background: linear-gradient(90deg, #c0c0c0, #a0a0a0);">
+                                        </div>
                                     </div>
-                                    <span style="opacity: 0.6; font-size: 0.8rem;">{{ round(($vicePresident->votes_count / $totalVotes) * 100, 1) }}%</span>
+                                    <span
+                                        style="opacity: 0.6; font-size: 0.8rem;">{{ round(($vicePresident->votes_count / $totalVotes) * 100, 1) }}%</span>
                                 @endif
                             </div>
                         </div>
@@ -86,17 +95,20 @@
 
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                @foreach($candidates as $index => $candidate)
+                @foreach ($candidates as $index => $candidate)
                     <div class="fade-in-up" style="margin-bottom: 18px;">
-                        <div class="glass-card" style="border-radius: 14px; padding: 16px 20px; display: flex; align-items: center; gap: 16px;">
-                            <div style="font-size: 1.4rem; font-weight: 800; opacity: 0.5; min-width: 30px; text-align: center;">
+                        <div class="glass-card"
+                            style="border-radius: 14px; padding: 16px 20px; display: flex; align-items: center; gap: 16px;">
+                            <div
+                                style="font-size: 1.4rem; font-weight: 800; opacity: 0.5; min-width: 30px; text-align: center;">
                                 #{{ $index + 1 }}
                             </div>
-                            @if($candidate->picture)
+                            @if ($candidate->picture)
                                 <img src="{{ asset('candidates/' . $candidate->picture) }}" alt="{{ $candidate->name }}"
                                     style="width: 50px; height: 50px; border-radius: 12px; object-fit: cover;">
                             @else
-                                <div style="width: 50px; height: 50px; border-radius: 12px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;">
+                                <div
+                                    style="width: 50px; height: 50px; border-radius: 12px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;">
                                     👤
                                 </div>
                             @endif
@@ -114,4 +126,22 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const panelResult = document.getElementById('panel-result');
+
+            const correctKeyword = "{{ $keyword }}";
+
+            const userInput = prompt("Masukkan keyword:");
+
+            if (userInput !== null && userInput.trim() === correctKeyword) {
+                panelResult.style.display = 'block';
+            } else {
+                panelResult.style.display = 'none';
+            }
+        });
+    </script>
 @endsection
