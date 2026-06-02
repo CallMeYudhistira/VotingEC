@@ -80,16 +80,41 @@ class VoteController extends Controller
             return redirect('/');
         }
 
+        $totalVotes = Vote::count();
+
+        // Check if keyword is already verified in session
+        if (!session('result_keyword_verified')) {
+            return view('result', [
+                'candidates' => [],
+                'totalVotes' => $totalVotes,
+                'president' => null,
+                'vicePresident' => null,
+                'isLocked' => true
+            ]);
+        }
+
         $candidates = Candidate::withCount('votes')
             ->orderByDesc('votes_count')
             ->get();
 
-        $totalVotes = Vote::count();
         $president = $candidates->first();
         $vicePresident = $candidates->count() > 1 ? $candidates->get(1) : null;
 
+        return view('result', compact('candidates', 'totalVotes', 'president', 'vicePresident'));
+    }
+
+    /**
+     * Verify the result keyword via AJAX.
+     */
+    public function checkKeyword(Request $request)
+    {
         $keyword = env('KEYWORD_RESULT');
 
-        return view('result', compact('candidates', 'totalVotes', 'president', 'vicePresident', 'keyword'));
+        if ($request->keyword === $keyword) {
+            session(['result_keyword_verified' => true]);
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false], 403);
     }
 }

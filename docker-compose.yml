@@ -22,6 +22,8 @@ services:
     ports:
       - "8003:8003"
     restart: always
+    volumes:
+      - app_public:/app/public/candidates
     depends_on:
       - db
     env_file:
@@ -29,3 +31,4 @@ services:
 
 volumes:
   votingec_db_data:
+  app_public:

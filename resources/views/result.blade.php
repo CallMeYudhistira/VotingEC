@@ -11,7 +11,7 @@
         </div>
     </section>
 
-    <div class="container py-5" id="panel-result" style="display: none;">
+    <div class="container py-5" id="panel-result" style="{{ isset($isLocked) && $isLocked ? 'display: none;' : '' }}">
         {{-- Winner Announcement --}}
         @if ($president)
             <div class="row justify-content-center g-4 mb-5">
@@ -131,16 +131,38 @@
 @section('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const panelResult = document.getElementById('panel-result');
+            const isLocked = {{ isset($isLocked) && $isLocked ? 'true' : 'false' }};
 
-            const correctKeyword = "{{ $keyword }}";
+            if (isLocked) {
+                const userInput = prompt("Masukkan keyword:");
 
-            const userInput = prompt("Masukkan keyword:");
-
-            if (userInput !== null && userInput.trim() === correctKeyword) {
-                panelResult.style.display = 'block';
-            } else {
-                panelResult.style.display = 'none';
+                if (userInput !== null && userInput.trim() !== "") {
+                    fetch("{{ route('result.check') }}", {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                            },
+                            body: JSON.stringify({
+                                keyword: userInput.trim()
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                window.location.reload();
+                            } else {
+                                alert("Wrong keyword! Access denied.");
+                                window.location.href = "{{ route('home') }}";
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert("An error occurred. Please try again.");
+                        });
+                } else {
+                    window.location.href = "{{ route('home') }}";
+                }
             }
         });
     </script>

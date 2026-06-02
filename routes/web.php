@@ -18,6 +18,7 @@ Route::get('/vote', [VoteController::class, 'vote'])->name('vote');
 Route::post('/vote', [VoteController::class, 'submitVote'])->name('vote.submit');
 Route::get('/success', [VoteController::class, 'success'])->name('vote.success');
 Route::get('/result', [VoteController::class, 'result'])->name('result');
+Route::post('/result/check', [VoteController::class, 'checkKeyword'])->name('result.check');
 
 /*
 |--------------------------------------------------------------------------
