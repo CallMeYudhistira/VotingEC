@@ -16,6 +16,7 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+GEMINI.md
 
 /public/candidates/*
 !/public/candidates/.gitkeep

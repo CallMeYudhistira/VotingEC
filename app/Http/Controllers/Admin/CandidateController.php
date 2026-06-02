@@ -131,7 +131,9 @@ class CandidateController extends Controller
         Candidate::truncate();
         \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
+        \App\Models\VotingSetting::setStatus('not_started');
+
         return redirect()->route('admin.candidates.index')
-            ->with('success', 'Semua kandidat dan foto berhasil direset!');
+            ->with('success', 'Semua kandidat, foto, dan suara berhasil direset! Status voting kembali ke "Belum Dimulai".');
     }
 }
