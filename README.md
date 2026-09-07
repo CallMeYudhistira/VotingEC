@@ -23,10 +23,8 @@ A modern, dynamic voting system built for the English Club president election. B
 - **Framework**: Laravel 11.0
 - **Frontend**: Blade, Bootstrap 5.3, Custom CSS
 - **Database**: MySQL 8.0
-- **Server**: FrankenPHP (via Laravel Octane)
-- **Environment**: Docker & Docker Compose
 
-## 🚀 Installation via Docker (Recommended)
+## 🚀 Installation Guide
 
 1. **Clone the repository**
    ```bash
@@ -66,11 +64,3 @@ After running migrations with the `--seed` flag, a default admin account is crea
 - **Password**: `password`
 
 *(Please change the password immediately after logging in for the first time)*
-
-## 📸 Screenshots
-
-*(Add screenshots here before publishing to GitHub)*
-- Landing Page
-- Voting Interface
-- Results Page
-- Admin Dashboard
